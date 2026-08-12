@@ -1,0 +1,21 @@
+{
+  "name": "chase-skills",
+  "owner": {
+    "name": "Chase"
+  },
+  "metadata": {
+    "description": "Personal Claude Code skills: measured controller-cost discipline and Codex delegation patterns.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "chase-workflow",
+      "description": "Session-cost discipline and Codex delegation patterns for plan-driven agentic work. Layers on top of superpowers rather than forking it.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Chase"
+      },
+      "source": "./plugins/chase-workflow"
+    }
+  ]
+}
