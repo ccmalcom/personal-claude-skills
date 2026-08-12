@@ -5,6 +5,8 @@
   "author": {
     "name": "Chase"
   },
+  "homepage": "https://github.com/ccmalcom/personal-claude-skills",
+  "repository": "https://github.com/ccmalcom/personal-claude-skills",
   "license": "MIT",
   "skills": "./skills/",
   "keywords": [

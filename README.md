@@ -12,7 +12,7 @@ your `CLAUDE.md`.
 ## Install
 
 ```
-/plugin marketplace add <you>/personal-claude-skills
+/plugin marketplace add ccmalcom/personal-claude-skills
 /plugin install chase-workflow@chase-skills
 ```
 
