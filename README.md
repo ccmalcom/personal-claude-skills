@@ -3,11 +3,18 @@
 A Claude Code plugin marketplace for skills that are general engineering technique rather than
 personal setup.
 
-The companion repo [claude-config](../claude-config) holds the other half — `settings.json`,
-global `CLAUDE.md`, hooks, auto-memory, and personal-workflow skills that reference my own vault
-and repos. The split is **personal identity and machine config there, shareable technique here**,
-because a plugin can carry skills, agents, commands, and hooks, but cannot carry your settings or
-your `CLAUDE.md`.
+It's one of three repos:
+
+- [claude-config](https://github.com/ccmalcom/claude-config) — `settings.json`, global `CLAUDE.md`,
+  hooks, auto-memory, and personal-workflow skills that reference my own vault and repos.
+- [claude-knowledge-vault](https://github.com/ccmalcom/claude-knowledge-vault) — the notes those
+  skills read and write.
+- **this repo** — skills that are general technique, packaged as a marketplace.
+
+The split is **personal identity and machine config there, knowledge in the vault, shareable
+technique here**, because a plugin can carry skills, agents, commands, and hooks, but cannot carry
+your settings or your `CLAUDE.md`. Nothing here references my vault or my repos, which is what
+makes it installable by anyone.
 
 ## Install
 
