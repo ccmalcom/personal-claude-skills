@@ -1,6 +1,6 @@
 ---
 name: controller-budget
-description: "Keep a long-running controller session from burning its budget on context re-reads. Use WHENEVER acting as the driving/controller session for multi-task plan execution — superpowers subagent-driven-development, executing-plans, or any loop that dispatches subagents task after task — and when writing a plan that such a session will execute. Also use when the user asks why a session is expensive, why token/usage burn is high, whether to restart or /compact a session, or how to make agentic execution cheaper. Reach for it the moment work is shaped as 'controller dispatches implementers across many tasks', even if cost was never mentioned."
+description: "Keep a long-running controller session from burning its budget on context re-reads. Use WHENEVER this session is handed a multi-task plan to run — superpowers executing-plans (inline, no subagents: the worst case, since every tool result lands in this context), subagent-driven-development, or any loop that works task after task — including prompts like 'execute the plan inline', 'in this session', 'implement every task yourself', 'run the waves in order', 'do each task yourself', and unattended or overnight runs. Also use when writing a plan such a session will execute, and when the user asks why a session is expensive, why token/usage burn is high, whether to restart or /compact a session, or how to make agentic execution cheaper. Reach for it before the first task starts, even if cost was never mentioned."
 ---
 
 # Controller Budget
@@ -51,6 +51,17 @@ Concretely, at roughly 20 turns per task:
 
 A restart costs one re-establishment turn — about 40k units — and buys back far more. It is only
 free if the state of record is on disk, which is the next rule.
+
+**When the whole plan must run in this session** — an unattended or overnight run, or the user
+says so — there is nobody to hand off to, so do not propose stopping. Cap the floor mechanically
+instead, and say so once before the first task:
+
+- `autoCompactWindow` must be set in `~/.claude/settings.json` (200000 is the working value). It is
+  an absolute token count, and left unset a 1M-window model compacts near 1M. Measured on a 7-wave
+  plan run unattended in one Opus session with it unset: 895 turns, mean floor 380k, peak 960k, 89%
+  of turns above 120k — about 2.5–3× the per-turn cost of a capped session.
+- Keep the ledger current after every task (rule 2), because each auto-compaction is a forced
+  restart and it only resumes cleanly from disk.
 
 ### 2. Write the ledger as you go, not at the end
 
@@ -109,6 +120,11 @@ killed:
   clustered at a median context of 264k. Correlation with big-context moments, not causation.
 - **Large tool outputs.** Real in principle, absent in practice on a disciplined session — 152
   tool results averaged 287 tokens each. Check before compressing.
+- **Offloading subtasks to a local model (ollama).** Structurally cannot help: the controller's own
+  floor is 63–72% of spend, and delegating a subtask does not shrink it — it adds a turn to it. The
+  one shape that would pay, pre-filtering large outputs before they enter context, is the case
+  already measured as absent. Local models fit work that costs a whole *session* rather than a turn
+  (commit-message drafting from a diff, triaging a long CI log); keep them out of the execution loop.
 
 The pattern: **cost intuitions are wrong more often than they are right, and they are cheap to
 check.** Before optimizing anything here, measure it against the floor.
