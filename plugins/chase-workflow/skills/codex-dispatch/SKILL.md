@@ -30,7 +30,7 @@ the last one:
 |---|---|---|
 | Before brainstorming/scoping | Read-only repo inventory | §1 |
 | Plan drafting | Draft the plan doc from the inventory | §2 |
-| **After writing-plans, before SDD** | **Read-only plan review** | **§3** |
+| **After writing-plans, before SDD** | **Read-only plan review** | **§3** (also checks Routing blocks when present) |
 | Inside the SDD loop | Task execution, one task per dispatch | §4 |
 
 **The plan review is the highest value-per-minute use found so far.** A plan asserts dozens of

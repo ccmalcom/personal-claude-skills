@@ -183,6 +183,12 @@ Report any that do not exist, have a different signature, or live somewhere else
 Also check behavior, not just symbols: where the plan's code claims to reproduce existing behavior
 in [reference file/function], compare them and report any divergence.
 
+Routing checks (when the plan has any `**Routing:**` block or a "Routing snapshot" heading): fail a plan
+that has Routing blocks and no snapshot, or a snapshot and no blocks; a task tagged class mechanical or executor tier cheap whose text needs a design choice;
+an executor `inline` on a task that creates a file or touches more than two; a reviewer tier below the
+executor tier on a task the plan calls load-bearing; a Gemini route without `cap <tokens>`; more than a
+third of tasks inline; any route id not in core/routes.json of the registry version the snapshot names.
+
 If a claim is correct, do NOT list it. I want an actionable list, not an audit.
 
 [standing rules block]
@@ -222,6 +228,8 @@ Expected to be RED before your fix, by test name: [name them individually].
 When done, report: files touched, commands run with their actual output, and any place the plan
 disagreed with the real repo.
 ```
+
+After a by-hand dispatch, write one `executor` or `reviewer` record: `agent-routing record -` with the fields in spec §4.6.
 
 **Paste that verification block verbatim, then add task-specific gates to it.** Editing down from
 the template is safe; composing up from memory is not. One dispatch that named three sensible gates
@@ -343,6 +351,7 @@ Run this on every returned task. This is where the workflow's errors actually ge
 - [ ] **A deliberate behavior change needs an inline comment at the expectation site.** Two import
       changes read cold as regressions (`.5` yielding `0.5` instead of `1`). Without the comment the
       next reader's instinct is to restore the old number.
+- [ ] After a by-hand dispatch, write one `executor` or `reviewer` record: `agent-routing record -` with the fields in spec §4.6.
 
 ---
 

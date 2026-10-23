@@ -1,7 +1,7 @@
 {
   "name": "chase-workflow",
   "description": "Session-cost discipline and Codex delegation patterns for plan-driven agentic work. Two skills that layer on top of superpowers' writing-plans / executing-plans / subagent-driven-development rather than forking them.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Chase"
   },
