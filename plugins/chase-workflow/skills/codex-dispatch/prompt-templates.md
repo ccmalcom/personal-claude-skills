@@ -189,10 +189,14 @@ an executor `inline` on a task that creates a file or touches more than two; a r
 executor tier on a task the plan calls load-bearing; a Gemini route without `cap <tokens>`; more than a
 third of tasks inline; any route id not in core/routes.json of the registry version the snapshot names.
 
+[REGISTRY: absolute path to agent-config's core/routes.json at the snapshot's registry version, or its route id -> tier list pasted here]
+
 If a claim is correct, do NOT list it. I want an actionable list, not an audit.
 
 [standing rules block]
 ```
+
+A by-hand plan-seam review writes one `seam-review` record, not `reviewer`, per agent-config's `skills/routing/references/seams.md` ("The record").
 
 - **Name the symbols explicitly.** Not "review this plan" — the findings map one-to-one onto the
   checklist items you provide.
@@ -229,12 +233,12 @@ When done, report: files touched, commands run with their actual output, and any
 disagreed with the real repo.
 ```
 
-After a by-hand dispatch, write one `executor` or `reviewer` record: `agent-routing record -` with the fields in spec §4.6.
+After a by-hand dispatch (outside a routing-skill controller run, which writes its own records), write one `executor` or `reviewer` record: `agent-routing record -` with the fields and roles in agent-config's `skills/routing/references/execute-time.md` ("The ledger"); the writer exits 2 and says why on a malformed record.
 
 **Paste that verification block verbatim, then add task-specific gates to it.** Editing down from
 the template is safe; composing up from memory is not. One dispatch that named three sensible gates
 dropped `prettier` — all three named gates passed, the work was correct, and the stop-hook failed
-the turn on formatting. The gate was line 158 of this file the whole time.
+the turn on formatting. The gate was in §4's VERIFICATION block the whole time.
 
 Rules in that block, each paid for:
 
@@ -351,7 +355,7 @@ Run this on every returned task. This is where the workflow's errors actually ge
 - [ ] **A deliberate behavior change needs an inline comment at the expectation site.** Two import
       changes read cold as regressions (`.5` yielding `0.5` instead of `1`). Without the comment the
       next reader's instinct is to restore the old number.
-- [ ] After a by-hand dispatch, write one `executor` or `reviewer` record: `agent-routing record -` with the fields in spec §4.6.
+- [ ] **Ledger record written.** If you have not already, after a by-hand dispatch write one `executor` or `reviewer` record with `agent-routing record -` (fields: §4).
 
 ---
 

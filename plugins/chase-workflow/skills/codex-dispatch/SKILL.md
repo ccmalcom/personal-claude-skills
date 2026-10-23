@@ -17,7 +17,7 @@ relevant block, then edit down. Never compose one from memory.**
 
 The failure mode of a hand-rolled prompt is *silent subtraction*. One dispatch named three sensible
 gates, Codex ran exactly those three, all green, work correct — and the stop hook then failed the
-turn on `prettier`, which had been line 158 of the template the whole time. Nothing about that
+turn on `prettier`, which had been in the template's §4 VERIFICATION block the whole time. Nothing about that
 dispatch looked incomplete. What was missing was only visible against the template.
 
 ## Where Codex fits in the pipeline
@@ -117,7 +117,7 @@ dispatch must be self-contained:
 
 Codex reports honestly — including reporting INCOMPLETE rather than claiming green, and halting
 rather than adapting when a brief disagrees with the repo. That is the right behavior. But honest
-reporting is not verification.
+reporting is not verification. A by-hand dispatch also writes a ledger record; see prompt-templates.md §4 and §6.
 
 - **A claim about the code is a factual claim; check it.** This applies to Codex's attributions
   *and* to prior tasks' stated blockers, which arrive with more authority and get less scrutiny.
